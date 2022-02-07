@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<style type="text/css">
+
+    section .card-panel{
+        max-width: 460px;
+        margin: 20px auto;
+        padding: 20px;
+    }
+
+    #as {
+        color: #5e17eb
+    }
+
+    #car {
+        background-color: #8c52ff;
+        max-width: 460px;
+        margin: 20px auto;
+        padding: 20px;
+    }
+
+    #colore {
+        background-color: #8c52ff;
+    }
+
+</style>
+
+<nav class="white z-depth-0">
+    <div class="containter">
+        <h1 class="black-text brand-logo brand-text center"><b>Digi<span id="as">Asugi</span></b></h1>
+    </div>
+</nav>
+
+<section class="container col-12">
+    <h5 class="center">Il mio status</h3>
+    <div class="card-panel grey lighten-2">
+        <div class="card-content">
+            <p>Attualmente sei:</p>
+                <ul class="collection">
+                    {% if persona.positività == True %}
+                    <li class="collection-item">
+                        <i class="material-icons red-text white">warning</i>
+                        <span>Positivo</span>
+                        </li>
+
+                    {% if persona.questionario == True %}
+                    <li class="collection-item">
+                        <i class="material-icons blue-text white">description</i>
+                        <span><a href="https://www.salute.gov.it/portale/nuovocoronavirus/dettaglioFaqNuovoCoronavirus.jsp?lingua=italiano&id=244">
+                            Linee guida
+                        </a></span></li>
+
+                    {% else %}
+                    <li class="collection-item">
+                        <i class="material-icons red-text white">error</i>
+                        <span>Questionario</span>
+                       
+                    {% endif %}</li>
+
+                    {% else %}
+                    <li class="collection-item">
+                        Negativo
+                    {% endif %}</li>
+
+                </ul> 
+            {% if persona.positività == True %}
+                {% if persona.questionario == False %}
+                    <form action="questionario" method="post">
+                        {% csrf_token %}
+                        <input id="colore" class="btn brand" type="submit" name="{% url 'questionario' %}" value="Compila il questionario">
+                    </form>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<section  id="car">
+
+            <h4 class="white-text">Informazioni:</h4>
+            <p class="white-text">Informazioni sul mio green pass <span class="right"><i class="material-icons white-text" id="colore">keyboard_arrow_right</i></span></p>
+            <p class="white-text">Le mie linee guida <span class="right"><i class="material-icons white-text" id="colore">keyboard_arrow_right</i></span></p>
+            <p class="white-text">Nucleo familiare <span class="right"><i class="material-icons white-text" id="colore">keyboard_arrow_right</i></span></p>
+
+</section>
+
+{% endblock %}

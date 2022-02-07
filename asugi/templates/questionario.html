@@ -1,0 +1,35 @@
+{% extends "base.html" %} 
+ 
+{% block body %} 
+ 
+<style type="text/css"> 
+ 
+    form { 
+        max-width: 460px; 
+        margin: 20px auto; 
+        padding: 20px; 
+    } 
+ 
+    .btn { 
+        background-color: #8c52ff; 
+    } 
+</style> 
+ 
+<nav class="white z-depth-0"> 
+    <div class="containter"> 
+        <h1 class="black-text brand-logo brand-text center"><b>Fatto?</b></h1> 
+    </div> 
+</nav> 
+ 
+<section class="container col-12"> 
+    <form class="white" action="compilazione" method="POST"> 
+        <div class="card-panel grey lighten-2"> 
+            <div class="card-content center">   
+                {% csrf_token %}
+                <input class="btn brand" type="submit" name="{% url 'compilazione' %}" value="submit">
+            </div> 
+        </div> 
+    </form> 
+</section> 
+ 
+{% endblock %}
